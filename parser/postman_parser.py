@@ -2,6 +2,7 @@ import json
 from typing import Dict, Any, List
 from parser.models import Endpoint
 from parser.models import Endpoint, Auth
+from urllib.parse import urlparse
 
 
 class PostmanParser:
@@ -59,7 +60,11 @@ class PostmanParser:
         method = request.get("method", "GET")
 
         url_data = request.get("url", {})
-        url = url_data.get("raw", "")
+        raw_url = url_data.get("raw", "")
+        parsed_url = urlparse(raw_url)
+
+        # Remove query string
+        url = f"{parsed_url.scheme}://{parsed_url.netloc}{parsed_url.path}"
 
         headers = self._parse_headers(request.get("header", []))
         query_params = self._parse_query(url_data.get("query", []))
