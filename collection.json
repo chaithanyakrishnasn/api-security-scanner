@@ -1,16 +1,60 @@
 {
   "info": {
-    "name": "Test Collection",
-    "_postman_id": "abc123",
+    "name": "API Security Test Collection",
+    "_postman_id": "12345",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Test Request",
+      "name": "Get User",
       "request": {
         "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer testtoken123"
+          }
+        ],
         "url": {
-          "raw": "https://api.example.com/test"
+          "raw": "https://api.example.com/user?id=1&name=admin",
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            },
+            {
+              "key": "name",
+              "value": "admin"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Login API",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "url": {
+          "raw": "https://api.example.com/login"
+        },
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "admin"
+            },
+            {
+              "key": "password",
+              "value": "1234"
+            }
+          ]
         }
       }
     }
